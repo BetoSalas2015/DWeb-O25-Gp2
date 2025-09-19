@@ -38,10 +38,3 @@ console.log( 0 === '0');
 console.log( 48 === '0');
 console.log( 48 == '48');
 
-
-
-   
-
-
-
-
