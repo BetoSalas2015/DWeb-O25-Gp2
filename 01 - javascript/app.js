@@ -27,37 +27,52 @@ const salarios = [
     }
 ];
 
-const id = 4
+ const id = 3
 
-const getEmpleado = function(id, callback) {
-    const empleado = empleados.find( (e) => (e.id === id) )?.nombre
-    if (empleado) {
-        callback(null, empleado);
-    } else {
-        callback (`El empleado con id ${id} no existe.`);
-    }
+const getEmpleado = (id) => {
+    const promesa = new Promise( (resolve, reject) => {
+        setTimeout(() => {
+            const empleado = empleados.find( (e) => (e.id === id) )?.nombre
+            if (empleado) {
+                resolve(empleado);
+            } else {
+                reject(`El empleado con id ${id} no existe.`);
+            }
+        }, 3000);
+       
+    } );
+    return promesa;
     
 };
 
-const getSalario = function(id, callback) {
-    const salario = salarios.find( e => e.id === id )?.salario
-    if (salario) {
-        callback(null, salario)
-    } else {
-        callback((`El salrio con id ${id} no existe.`))
-    }
+
+const getSalario = function(id) {
+    return new Promise( (resolve, reject) => {
+        setTimeout(() => {
+            const salario = salarios.find( e => e.id === id )?.salario
+            salario ? resolve(salario) : reject((`El salrio con id ${id} no existe.`))
+        }, 3000); 
+       
+    } ) 
 }
 
-getEmpleado(id, (err, empleado) => {
-    if (err) {
-        return console.log(err);  
-    }
-    getSalario(id, (err, salario) => {
-        if (err) {
-            console.log( `El empleado ${empleado} no tiene salario` );
-            return
-        }
-        console.log(`El empleado ${empleado} tiene un salario de  ${salario}`); 
-    })
-})
+const getInfoUsuario = async () => {
+    const empleado = await getEmpleado(id);
+    const salario =  await getSalario(id);
+    return `El empleado ${empleado} tiene un salario de ${salario}. `;
+};
+
+/*getEmpleado(id)
+    .then( (empleado) => {
+            const emp = empleado
+            return getSalario(id).then( (salario) => {
+                    console.log(`El empleado ${emp} tiene un salario de ${salario}`);
+                } );
+        } )
+    .catch( (err) => { console.log(err) } );*/
+
+console.log("Antes de realizar la búsqueda");
+getInfoUsuario().then( (msg) => { console.log(msg) })
+                .catch( (err) => { console.log(err) } );
+console.log("Después de realizar la búsqueda");
 
