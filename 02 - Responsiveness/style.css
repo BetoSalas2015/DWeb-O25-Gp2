@@ -1,5 +1,9 @@
+* {
+    margin: 0px;
+}
+
 #container {
-    width: 1000px;
+    width: 90%;
     background: red;
     margin: 0px auto;
     font-family: Arial, Helvetica, sans-serif;
@@ -44,3 +48,43 @@ aside {
     float: left;
     margin: 15px;
 }
+
+.clearfix {
+    float: none;
+    clear: both;
+}
+
+/* * Estilos resaponsivos */
+/* * desde 0px hasta 604px  */
+@media (min-width: 504px) and ( max-width: 604px ) {
+    #articles article {
+        width: 40%;
+        background: goldenrod;
+    }
+
+}
+
+@media (min-width: 321px) and (max-width: 503px) {
+    aside {
+        float: none;
+        min-height: auto;
+        line-height: 20px;
+        width: 90%;
+        padding: 20px;
+    }
+
+    #container {
+        overflow: hidden
+    }
+
+    #articles article {
+        margin: 5%;
+        width: 90%;
+        background: blueviolet;
+    }
+
+    #articles {
+        width: 100%;
+    }
+}
+
