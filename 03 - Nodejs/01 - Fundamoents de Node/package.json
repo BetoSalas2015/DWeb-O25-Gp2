@@ -1,0 +1,17 @@
+{
+  "name": "basesnode",
+  "version": "1.1.0",
+  "description": "Proyecto Node de tablas de Multiplicar",
+  "keywords": [
+    "javascript",
+    "node"
+  ],
+  "license": "ISC",
+  "author": "Roberto Salazar Márquez",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "base6": "node app.js --base=6"
+  }
+}
