@@ -8,10 +8,17 @@
   ],
   "license": "ISC",
   "author": "Roberto Salazar Márquez",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "base6": "node app.js --base=6"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

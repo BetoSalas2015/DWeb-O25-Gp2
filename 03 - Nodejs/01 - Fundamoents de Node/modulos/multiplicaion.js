@@ -1,52 +1,25 @@
-const fs = require('node:fs')
+import { writeFileSync } from "node:fs"
+const colors = await import('colors')
 
-/*const crearArchivo = (base = 5) => {
-    const promesa = new Promise( (resolve, reject) => {
+export const crearArchivo = (base = 5) => {
+    return new Promise( (resolve) => {
         let salida = ""
+        
+        console.log(colors.default.green("===================="));
+        console.log(colors.default.yellow(`   Tabla del ${base}`));
+        console.log(colors.default.green("===================="));
 
-        console.log("=============================");
-        console.log(`       Tabla del ${base}     `);
-        console.log("=============================");
-
-        for (let i = 1;  i <= 10 ; i++) {
-            salida += `${base} * ${i} = ${base * i}\n`
+        for (let i = 1; i < 10; i++) {
+            salida += `${base} * ${i} = ${ base * i}\n`;
         }
 
-        fs.writeFile(`Tabla-${base}.txt`,salida, (err) => {
-            if(err) reject(err)
-            resolve(`Tabla del ${base}`)
-            
-        })
-
+        try {
+            writeFileSync(`Tabla-${base}.txt`, salida)
+        } catch (err) {
+            throw err;
+        }
+        resolve(`Tabla-${base}.txt`)
         console.log(salida);
     })
-     return promesa;
-   
-}; */
-
-const crearArchivo = async (base = 5) => {
-    let salida = ""
-
-    console.log("=============================");
-    console.log(`       Tabla del ${base}     `);
-    console.log("=============================");
-
-    for (let i = 1;  i <= 10 ; i++) {
-        salida += `${base} * ${i} = ${base * i}\n`
-    }
-    // writeFileSync
-    
-        try {
-            fs.writeFileSync(`Tabla-${base}.txt`,salida)
-        } catch (error) {
-            throw error
-        }
-        console.log(salida);
-        
-    return `Tabla-${base}.txt`;
+ 
 };
-
-
-module.exports = {
-    crearArchivo
-}
