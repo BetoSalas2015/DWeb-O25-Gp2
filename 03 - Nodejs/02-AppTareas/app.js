@@ -1,16 +1,17 @@
 const colors = await import('colors');
-import { mostrarMenu, pausa } from './js/mensajes.js';
+import { inquirerMenu, pausa } from './js/inquirer.js';
 
 const main = async () => {
     
-    let opc = '0';
+    let opc = 0;
     do {
-       opc = await mostrarMenu();
+       opc = await inquirerMenu();
        console.log(opc);
+       if (opc !== 0) {
+         await pausa();
+       }
        
-    } while (opc !== '0');
-    
-     await pausa();
+    } while (opc !== 0);
     
 };
 
