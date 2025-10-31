@@ -48,9 +48,25 @@ export const inquirerMenu = async () => {
 };
 
 export const pausa =  async () => {{
-    const {pausaOpt} = inquirer.prompt([{
+    const {pausaOpt} = await inquirer.prompt([{
         type: 'input',
         name: 'pausaOpt',
         message: `Presione ${colors.default.yellow('<<ENTER>>')} para continuar.`
     }]);
 }};
+
+export const capturaEntrada = async (message) => {
+    const respuesta = await inquirer.prompt([{
+        type: 'input',
+        name: 'resp',
+        message,
+        validate: (entrada) => {
+            if (entrada.length === 0) {
+                return `Entrada inválida. Reintente`
+            } else {
+                return true;
+            }
+        }
+    }])
+    return respuesta.resp
+};
