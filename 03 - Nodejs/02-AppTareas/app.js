@@ -1,19 +1,25 @@
 const colors = await import('colors');
 import { inquirerMenu, pausa, capturaEntrada } from './js/inquirer.js';
 import { Tareas } from './modelos/tareas.js'
-import { guardabase } from './js/guardabase.js';
+import { guardabase, cargaBase } from './js/guardabase.js';
 
 const main = async () => {
     
     let opc = 0;
     let tareas = new Tareas();
+    const tareasbd = await cargaBase();
+    if (tareasbd) {
+       await tareas.cargarListado(tareasbd);
+    }
 
     do {
        opc = await inquirerMenu();
        switch (opc) {
           case 1:  const resp = await capturaEntrada("Descripción: ");
                   tareas.crearTarea(resp); break
-          case 2: console.log(tareas.listadoArr); break;
+          case 2: tareas.imprimeTareas(); break;
+          case 3: tareas.imprimePendientesCompletadas(true); break;
+          case 4: tareas.imprimePendientesCompletadas(false); break;
           
        }
        guardabase(tareas.listadoArr);
