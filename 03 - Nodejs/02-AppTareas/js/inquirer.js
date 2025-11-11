@@ -70,3 +70,22 @@ export const capturaEntrada = async (message) => {
     }])
     return respuesta.resp
 };
+
+export const listadoTareasBorrar = async (listado = []) => {
+    let cont = 0;
+    const choices = listado.map( (tarea) => {
+        cont++;
+        return { 
+            value: tarea.id,
+            name: `${colors.default.green(cont.toString() + '.')} ${colors.default.white(tarea.descripcion)}`
+        }
+    });
+    const respuesta = await inquirer.prompt([{
+        type: 'list',
+        name: 'resp',
+        message: '¿Que tarea desea borrar?',
+        choices
+    }]);
+
+    return respuesta.resp;
+};

@@ -54,12 +54,19 @@ export class Tareas {
             });
         } else {
             this.listadoArr.forEach( (tarea) => {
-                if (tarea.completado !== null) {
+                if (tarea.completado === null) {
                     salida = `${colors.default.green(cont.toString() + ".")} ${tarea.descripcion} :: ${colors.default.yellow("Pendiente")}`
                     console.log(salida);
                     cont++;
                 }   
             });
+        }
+    };
+
+    
+    borrarTareas = (id) => {
+        if(this.listado[id]) {
+            delete this.listado[id];
         }
     };
 
