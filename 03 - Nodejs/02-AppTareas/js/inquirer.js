@@ -89,3 +89,29 @@ export const listadoTareasBorrar = async (listado = []) => {
 
     return respuesta.resp;
 };
+
+export const confirmar = async (message) => {
+    const { ok } = await inquirer.prompt([{
+        type: 'confirm',
+        name: 'ok',
+        message
+    }])
+    return ok;
+};
+
+export const listadoSeleccionar = async (listado) => {
+    const choices = listado.map( (tarea) => {
+        return {
+            value: tarea.id,
+            name: tarea.descripcion,
+            checked: (tarea.completado) ? true : false
+        }
+    } ); 
+    const respuesta = await inquirer.prompt([{
+        type: 'checkbox',
+        name: 'resp',
+        message: "Marque las tareas completadas",
+        choices
+    }]);
+    return respuesta.resp;
+};

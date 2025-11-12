@@ -70,4 +70,13 @@ export class Tareas {
         }
     };
 
+    cambiaTareas = (id = []) => {
+        id.forEach( (id) => {
+            const tarea = this.listado[id];
+            if (!tarea.completado) {
+                tarea.completado = new Date().toISOString()
+            }
+        });
+    };
+
 }

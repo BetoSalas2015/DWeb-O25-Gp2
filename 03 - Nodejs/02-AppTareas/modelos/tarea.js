@@ -10,4 +10,6 @@ export class Tarea {
         this.descripcion = desc;
         this.completado =  null
     }
+
+    
 }
