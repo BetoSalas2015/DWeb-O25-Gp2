@@ -63,3 +63,28 @@ export const confirmar = async (message) => {
     }])
     return ok;
 };
+
+export const listadoCiudades = async (listado = []) => {
+    let cont = 0
+    const choices = listado.map( (ciudad) => {
+        cont++; 
+        return {
+            value: ciudad.id,
+            name: `${colors.default.green(cont.toString() + ".")} ${colors.default.white(ciudad.lugar)}`,
+            lat: ciudad.lat,
+            lon: ciudad.lon
+
+        }
+    } ); 
+    choices.unshift({
+        value: 0,
+        name: `${colors.default.green("0.")} ${colors.default.white('Cancelar')}`
+    })
+    const respuesta = await inquirer.prompt([{
+        type: 'list',
+        name: 'resp',
+        message: "Seleccione la ciudad: ",
+        choices
+    }]);
+    return respuesta.resp;
+};
